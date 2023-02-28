@@ -1,0 +1,30 @@
+<template>
+
+	<template if:true={loading}>
+		<lightning-spinner alternative-text="Loading"></lightning-spinner>
+	</template>
+
+	<template if:false={loading}>
+
+		<template if:true={hasApiName}>
+			<lightning-flow 
+				flow-api-name={flowApiName}
+				onstatuschange={status}
+			></lightning-flow>
+		</template>
+
+		<template if:true={hasError}>
+			<lightning-card title="No Flow Available">
+				<div class="slds-text-body_regular" style="padding: 1rem;">
+					No flow was found with the following information:
+					<br/>
+					API Name: {flowApiName}
+					<br/>
+					Message: {message}
+				</div>
+				<button onclick={debug}>Debug</button>
+			</lightning-card>
+		</template>
+	</template>
+	
+</template>

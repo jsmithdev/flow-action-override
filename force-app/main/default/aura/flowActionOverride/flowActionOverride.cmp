@@ -1,0 +1,31 @@
+<aura:component implements="lightning:actionOverride,force:hasSObjectName" description="Lightning component override for New button action" access="global">
+    
+	<!-- Can default flowApiName below -->
+    <aura:attribute name="flowApiName" type="String" default="New_Account_Flow" />
+
+    <aura:attribute name="successMessage" type="String" default="New record successfully created." />    
+    <aura:attribute name="logoResource" type="String" default="NewActionLogo" access="private" />    
+
+    <aura:attribute name="isConsole" type="Boolean" access="private" />
+    <aura:attribute name="tabId" type="String" access="private" />						<!-- for console navigation -->
+    <aura:attribute name="isOpen" type="Boolean" default="false" access="private" />	<!-- for standard navigation -->
+    
+    <lightning:workspaceAPI aura:id="workspace" />
+    <lightning:navigation aura:id="navService" />
+    <lightning:notificationsLibrary aura:id="notifLib" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.onInit}" />
+    
+    <aura:if isTrue="{!v.isConsole || v.isOpen}">
+        <div role="dialog" tabindex="-1" class="slds-modal slds-modal_small slds-fade-in-open" aria-modal="true" aria-labelledby="modal-heading" aria-describedby="modal-content">
+            <div class="slds-modal__container">
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content">
+					<c:dynamicScreenFlow 
+						flowApiName="{!v.flowApiName}"
+						onstatuschange="{!c.statusChange}" />
+                </div>
+            </div>
+        </div>
+        <div aura:id="overlay" class="slds-backdrop slds-backdrop--open" />
+    </aura:if>    
+</aura:component>
