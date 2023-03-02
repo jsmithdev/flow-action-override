@@ -17,15 +17,18 @@
     <aura:handler name="init" value="{!this}" action="{!c.onInit}" />
     
     <aura:if isTrue="{!v.isConsole || v.isOpen}">
-        <div role="dialog" tabindex="-1" class="slds-modal slds-modal_small slds-fade-in-open" aria-modal="true" aria-labelledby="modal-heading" aria-describedby="modal-content">
-            <div class="slds-modal__container">
-                <div class="slds-modal__content slds-p-around_medium" id="modal-content">
-					<c:dynamicScreenFlow 
-						flowApiName="{!v.flowApiName}"
-						onstatuschange="{!c.statusChange}" />
-                </div>
+        <div role="dialog" tabindex="-1" class="slds-modal slds-modal__container slds-modal_small slds-fade-in-open" aria-modal="true" aria-labelledby="modal-heading" aria-describedby="modal-content">
+            <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" onclick="{!c.handleCancelled}">
+				<lightning:icon iconName="utility:close" alternativeText="Close" title="Close">
+				</lightning:icon>
+				<span class="slds-assistive-text">Cancel</span>
+			</button>
+			<div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+				<c:dynamicScreenFlow 
+					flowApiName="{!v.flowApiName}"
+					onstatuschange="{!c.statusChange}" />
             </div>
         </div>
-        <div aura:id="overlay" class="slds-backdrop slds-backdrop--open" />
+        <div aura:id="overlay" class="slds-backdrop slds-backdrop--open" onclick="{!c.handleCancelled}" />
     </aura:if>    
 </aura:component>

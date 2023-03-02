@@ -1,2 +1,4 @@
-.THIS {
+.THIS div.slds-modal__content {
+	border-top-left-radius: var(--slds-c-modal-radius-border, var(--sds-c-modal-radius-border, var(--lwc-borderRadiusMedium,0.25rem)));
+	border-top-right-radius: var(--slds-c-modal-radius-border, var(--sds-c-modal-radius-border, var(--lwc-borderRadiusMedium,0.25rem)));
 }
